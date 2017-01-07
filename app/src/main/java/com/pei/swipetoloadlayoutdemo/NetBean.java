@@ -1,5 +1,8 @@
 package com.pei.swipetoloadlayoutdemo;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 /**
@@ -17,6 +20,14 @@ public class NetBean {
     private String page;
     private int total_pages;
     private List<FeedsBean> feeds;
+
+    protected NetBean(Parcel in) {
+        page = in.readString();
+        total_pages = in.readInt();
+
+    }
+
+
 
     public String getPage() {
         return page;
@@ -42,6 +53,10 @@ public class NetBean {
         this.feeds = feeds;
     }
 
+
+
+
+
     public static class FeedsBean {
         /**
          * source : 大糖 营养师团
@@ -62,6 +77,18 @@ public class NetBean {
         private String type;
         private int content_type;
         private List<String> images;
+
+        protected FeedsBean(Parcel in) {
+            source = in.readString();
+            title = in.readString();
+            link = in.readString();
+            tail = in.readString();
+            item_id = in.readInt();
+            type = in.readString();
+            content_type = in.readInt();
+            images = in.createStringArrayList();
+        }
+
 
         public String getSource() {
             return source;
@@ -126,5 +153,7 @@ public class NetBean {
         public void setImages(List<String> images) {
             this.images = images;
         }
+
+
     }
 }
